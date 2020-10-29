@@ -7,20 +7,34 @@
 </head>
 <body>
   <script>
+
+    /* 
+    fn.bind(obj)
+    1. 返回一个新函数
+    2. 新函数内部会去调用原函数, 并指定原函数的this为第一个参数
+    */
+
+    Function.prototype.bind = function (obj) {
+      console.log('-----')
+      const that = this
+      return function (...args) {
+        // this是fn, 
+        return that.call(obj, ...args)
+      }
+    }
+
     var m = 1
     function fn() {
       console.log(this.m)
+      return 1
     }
     const obj = {m: 2}
     const fn2 = fn.bind(obj)
     fn() // 1
-    fn2() // 2  // fn.call(obj)  新函数内部在调用原来的函数, 且指定它的this为obj
+    fn2() // 2
 
-    Function.prototype.bind = function (obj) {
-      return  () => {
-        return this.call(obj)
-      }
-    }
+
+    
   </script>
 </body>
 </html>
