@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    Function.prototype.call = function (obj, ...args) {
+      console.log('call()')
+      // 执行调用call方法的方法
+      // this(...args) // this不对
+      // obj.this(...args) // 没有这个方法
+
+      // 如果obj是null或者undefined时, 让obj为window
+      if (obj===undefined || obj===null) {
+        obj = window
+      }
+
+      // 给obj添加一个方法: tempFn: this
+      obj.tempFn = this
+      // 通过obj调用这个方法 ==> 执行的就是this指向的fn函数
+      const result = obj.tempFn(...args)
+      // 删除添加的方法
+      delete obj.tempFn
+      // 返回函数执行的结果
+      return result
+    }
+
+    Function.prototype.apply = function (obj, args) {
+      console.log('apply()')
+
+      // 如果obj是null或者undefined时, 让obj为window
+      if (obj===undefined || obj===null) {
+        obj = window
+      }
+
+      obj.tempFn = this
+      const result = obj.tempFn(...args)
+      delete obj.tempFn
+      return result
+    }
+
+    function apply (fn, obj, args) {
+      console.log('apply()')
+
+      // 如果obj是null或者undefined时, 让obj为window
+      if (obj===undefined || obj===null) {
+        obj = window
+      }
+
+      obj.tempFn = fn
+      const result = obj.tempFn(...args)
+      delete obj.tempFn
+      return result
+    }
+
+
+    function bind(fn, obj, ...args1) {
+      return (...args2) => {
+        // return apply(fn, obj, [...args1, ...args2])
+        fn.call(obj, ...args1, ...args2)
+      }
+    }
+  </script>
+
+  <script>
+
+    function fn(a, b) {
+      console.log(this, a, b)
+      return 2
+    }
+    const obj = {m: 1}
+    const result = fn.call(obj, 1, 3)  // 2
+    fn.call(null, 4, 5)
+
+    apply(fn, obj, [6, 7])
+    apply(fn, null, [6, 7])
+
+    // const fn2 = fn.bind(obj, 1, 2)
+    bind(fn, obj, 1, 2)
+    fn2(3, 4)
+  </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // new Promise((resolve, reject) => { // excutor
+    //   console.log('执行excutor')
+    // // 执行异步任务
+    // })
+
+
+    function fn() {
+      for (let index = 0; index < 100; index++) {
+        //处理
+      }
+    }
+    fn()
+
+    // 异步回调
+    setTimeout(() => {
+      console.log('执行timout回调')
+    }, 1000);
+
+    // 需要2S  ===> 定时器回调只能在2S之后才执行
+    for (let index = 0; index < 10000000000; index++) {
+    }
+
+
+    setTimeout(() => {
+      console.log('执行timout回调')
+    }, 0);
+    Promise.resolve().then(() => {
+      console.log('-----')
+    })
+
+
+    function ajax(url) {
+      return axios.get(url)
+    }
+
+    function test() {
+      ajax('/xxx').then(response => {
+
+      }).catch(error => {
+
+      })
+    }
+
+    async function test2() {
+      try {
+        const response = await ajax('/xxx')
+        return response.data
+      } catch (error) {
+        // throw error
+        return Promise.reject(error)
+      }
+    }
+
+    function test4() {
+      return ajax('/xxx').then((response) => {
+        return response.data
+      }).catch(error => {
+        // throw error
+        return Promise.reject(error)
+      })
+    }
+
+    function test3() {
+      // async函数返回的promise由什么决定: 由函数体执行的结果
+      const promise = test2()
+    }
+    
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <script>
+    /* 
+    使用ES6的类设计并测试以下需要
+      需求1: 
+        现在2个人, 都有姓名与年龄(值自己指定), 都能自我介绍自己的姓名和年龄, 能得到当前的总人数
+      需求2: 
+        现在又有了一个学生, 它有身价的属性, 能介绍它的所有信息
+        又有一个老师, 它有教授课程的属性, 能介绍它的所有信息
+    */
+    class Person {
+      constructor (name, age) {
+        this.name = name
+        this.age = age
+        Person.prototype.count++
+      }
+
+      // 添加属性: 在类中定义的属性都是类的实例对象的属性
+      state = {}
+      state2 = () => {}
+
+      // 添加方法: 在类中定义的方法会自动成为原型对象的方法
+      showInfo () {
+        console.log(`我叫${this.name}, 年方${this.age}`)
+      }
+    }
+    Person.prototype.count = 0
+
+
+
+    function Person2(name, age) {
+      this.name = name
+      this.age = age
+      Person2.prototype.count++
+    }
+
+    Person2.prototype.showInfo = function () {
+      console.log(`我叫${this.name}, 年方${this.age}`)
+    }
+    Person2.prototype.count = 0
+
+
+    const p = new Person('tom', 12)
+    console.log(p.count)
+    const pp = new Person('tom', 12)
+
+    const p2 = new Person2('jack', 13)
+  
+    console.log(p, p2, p.count, pp.count, p2.count)
+    p.showInfo()
+    p2.showInfo()
+
+
+    class Student extends Person {
+      constructor (name, age, price) {
+        super(name, age)
+        // this.name = name
+        // this.age = age
+        this.price = price
+      }
+
+      // 对从父类继承的方法进行重写
+      showInfo () {
+        console.log(`我叫${this.name}, 年方${this.age}, 身价${this.price}`)
+      }
+    }
+
+
+    function Teacher (name, age, course) {
+      // 借用父类型构造函数
+      Person2.call(this, name, age)  // 相当于: this.Person2(name, age)
+      // this.name = name
+        // this.age = age
+      this.course = course
+    }
+
+    // 让子类型的原型对象为父类型的实例
+    Teacher.prototype = new Person2()
+    // 让子类型的原型的构造器为子类型
+    Teacher.prototype.constructor = Teacher
+
+    Teacher.prototype.showInfo = function () {
+      console.log(`我叫${this.name}, 年方${this.age}, 课程${this.course}`)
+    }
+
+
+    const s = new Student('bob', 23, 100000)
+    s.showInfo()
+
+
+    const t = new Teacher('marry', 22, 120000)
+    t.showInfo()
+
+
+  </script>
+  
+</body>
+</html>

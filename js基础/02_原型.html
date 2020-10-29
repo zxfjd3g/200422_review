@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+    创建函数对象: new Function()
+    给函数对象添加prototype, 值为{}   this.prototype = {}
+    给原型对象添加constructor, 值为构造函数  this.prototype.constructor = Fn
+    */
+    function Fn() { 
+      
+    }
+
+    var fn = new Fn()  // 内部会给实例对象添加一个__proto__, 值构造函数的prototype属性值
+    // this.__proto__ = Fn.prototype
+
+  </script>
+</body>
+</html>

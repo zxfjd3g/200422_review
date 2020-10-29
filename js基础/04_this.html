@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var m = 1
+    function fn() {
+      console.log(this.m)
+    }
+    const obj = {m: 2}
+    const fn2 = fn.bind(obj)
+    fn() // 1
+    fn2() // 2  // fn.call(obj)  新函数内部在调用原来的函数, 且指定它的this为obj
+
+    Function.prototype.bind = function (obj) {
+      return  () => {
+        return this.call(obj)
+      }
+    }
+  </script>
+</body>
+</html>

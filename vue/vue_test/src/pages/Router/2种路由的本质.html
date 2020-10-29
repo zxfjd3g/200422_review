@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>router</title>
+</head>
+<body>
+  <a href="#/test1">test1</a><br>
+  <button onclick="location.hash = '#/test2'">test2</button><br>
+
+  <button onclick="pushState()">pushState</button> <br>
+  <button onclick="replaceState()">replaceState</button> <br>
+  <button onclick="readState()">readState</button> <br>
+  
+  <script>
+
+    // location
+    console.log(location.pathname, location.hash)
+    window.onhashchange = () => {
+      console.log('hashchange', location.hash)
+      console.log('根据当前hash路径来查找对应的路由组件来显示')
+    }
+
+    // history
+    function pushState () {
+      history.pushState({'name': 'tom' + Date.now()}, '', 'test3')
+    }
+
+    function replaceState () {
+      history.replaceState({'age': 1}, '', 'test4')
+    }
+
+    function readState () {
+      console.log(history.state)
+      console.dir(history)
+    }
+  </script>
+</body>
+</html>

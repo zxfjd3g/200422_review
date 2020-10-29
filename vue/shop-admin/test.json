@@ -1,0 +1,168 @@
+{
+  "success": true,
+  "code": 20000,
+  "message": "成功",
+  "data": {
+    "permissionList": [{
+      "redirect": "noredirect",
+      "path": "/acl",
+      "component": "Layout",
+      "hidden": false,
+      "children": [
+        {
+        "path": "user/list",
+        "component": "User",
+        "hidden": false,
+        "meta": {
+          "title": "用户管理"
+        },
+        "name": "name_1195268616021139457"
+      }, {
+        "path": "role/list",
+        "component": "Role",
+        "hidden": true,
+        "meta": {
+          "title": "王建军"
+        },
+        "name": "name_1195269295926206466"
+      }, {
+        "path": "user/list",
+        "component": "User",
+        "hidden": true,
+        "meta": {
+          "title": "wjj"
+        },
+        "name": "name_1195269473479483394"
+      }, {
+        "path": "role/list",
+        "component": "Role",
+        "hidden": false,
+        "meta": {
+          "title": "角色管理"
+        },
+        "name": "name_1195268788138598401"
+      }, {
+        "path": "role/list",
+        "component": "Role",
+        "hidden": true,
+        "meta": {
+          "title": "王建军"
+        },
+        "name": "name_1195269821262782465"
+      }, {
+        "path": "role/auth/:id",
+        "component": "RoleAuth",
+        "hidden": true,
+        "meta": {
+          "title": "角色权限"
+        },
+        "name": "name_1195270621548568578"
+      }, {
+        "path": "permission/list",
+        "component": "Permission",
+        "hidden": false,
+        "meta": {
+          "title": "菜单管理"
+        },
+        "name": "name_1195268893830864898"
+      }],
+      "meta": {
+        "icon": "lock",
+        "title": "权限管理"
+      },
+      "name": "name_1195268474480156673"
+    }, {
+      "redirect": "noredirect",
+      "path": "/category",
+      "component": "Layout",
+      "hidden": false,
+      "children": [{
+        "path": "list",
+        "component": "Category",
+        "hidden": false,
+        "meta": {
+          "title": "分类列表"
+        },
+        "name": "name_1237659506751852545"
+      }],
+      "meta": {
+        "icon": "category",
+        "title": "分类管理"
+      },
+      "name": "name_1237658989300568066"
+    }, {
+      "redirect": "noredirect",
+      "path": "/product",
+      "component": "Layout",
+      "hidden": false,
+      "children": [{
+        "path": "attr/list",
+        "component": "Attr",
+        "hidden": false,
+        "meta": {
+          "title": "平台属性管理"
+        },
+        "name": "name_1237888057774198785"
+      }, {
+        "path": "trademark/list",
+        "component": "Trademark",
+        "hidden": false,
+        "meta": {
+          "title": "品牌管理"
+        },
+        "name": "name_1237888391745654785"
+      }, {
+        "path": "spu/list",
+        "component": "Spu",
+        "hidden": false,
+        "meta": {
+          "title": "SPU管理"
+        },
+        "name": "name_1237888776510132225"
+      }, {
+        "path": "sku/list",
+        "component": "Sku",
+        "hidden": false,
+        "meta": {
+          "title": "SKU管理"
+        },
+        "name": "name_1237889144526753793"
+      }],
+      "meta": {
+        "icon": "shopping",
+        "title": "商品管理"
+      },
+      "name": "name_1237887750713397250"
+    }, {
+      "redirect": "noredirect",
+      "path": "/order",
+      "component": "Layout",
+      "hidden": false,
+      "children": [{
+        "path": "list",
+        "component": "Order",
+        "hidden": false,
+        "meta": {
+          "title": "订单列表"
+        },
+        "name": "name_1264876080868950018"
+      }],
+      "meta": {
+        "icon": "order",
+        "title": "订单管理"
+      },
+      "name": "name_1264875741788831746"
+    }, {
+      "redirect": "noredirect",
+      "path": "/user/list",
+      "component": "Layout",
+      "hidden": false,
+      "children": [],
+      "meta": {
+        "icon": "bug",
+        "title": "promise"
+      },
+      "name": "name_1308747290597732353"
+    }]
+  }
+}
