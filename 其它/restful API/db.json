@@ -4,11 +4,6 @@
       "id": 1,
       "title": "json-server",
       "author": "typicode"
-    },
-    {
-      "id": 2,
-      "title": "test",
-      "author": "atguigu"
     }
   ],
   "comments": [
@@ -26,11 +21,6 @@
       "body": "xxx",
       "postId": 1,
       "id": 3
-    },
-    {
-      "body": "xxx",
-      "postId": 1,
-      "id": 4
     }
   ],
   "profile": {
