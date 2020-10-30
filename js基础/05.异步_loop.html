@@ -43,31 +43,101 @@
     */
 
 
-    new Promise((resolve, reject) => {
-      // resolve(1)
-      reject(2)
-    }).then(value => {
-      console.log('onResolved1()', value)
-    }, reason => {
-      console.log('onRejected1()', reason)
-      // 执行出错(抛异常了)
-      // throw 3
-      // 返回一个失败的promise
-      // return Promise.reject(4)
+    // new Promise((resolve, reject) => {
+    //   // resolve(1)
+    //   reject(2)
+    // }).then(value => {
+    //   console.log('onResolved1()', value)
+    // }, reason => {
+    //   console.log('onRejected1()', reason)
+    //   // 执行出错(抛异常了)
+    //   // throw 3
+    //   // 返回一个失败的promise
+    //   // return Promise.reject(4)
 
-      // 返回一个成功的promise, 成功的value就是返回promise的value
-      // return Promise.resolve(5)
-      // 返回一个非promise任务值, 也可以不返回(返回undefined), 成功的value就是返回值
-      // return 6
+    //   // 返回一个成功的promise, 成功的value就是返回promise的value
+    //   // return Promise.resolve(5)
+    //   // 返回一个非promise任务值, 也可以不返回(返回undefined), 成功的value就是返回值
+    //   // return 6
 
-      // 注意: 如何创建一个promise但不返回, 本质上是返回undefined ==> value为undefined的成功promise
-      Promise.reject(7)
+    //   // 注意: 如何创建一个promise但不返回, 本质上是返回undefined ==> value为undefined的成功promise
+    //   Promise.reject(7)
 
-    }).then(value => {
-      console.log('onResolved2()', value)
-    }, reason => {
-      console.log('onResolved2()', reason)
-    })
+    // }).then(value => {
+    //   console.log('onResolved2()', value)
+    // }, reason => {
+    //   console.log('onResolved2()', reason)
+    // })
+
+
+    function ajax(url) {
+      return axios.get(url)
+    }
+    // const p1 = ajax(url1)
+    // const p2 = ajax(url2)
+    // const p3 = ajax(url3)
+    // Promise.all([p1, p2, p3])
+    //   .then(values => {
+    //     return ajax(url)
+    //   })
+    //   .then(value => {
+    //     console.log(value) // 就是第4个请求成功的value
+    //   })
+    //   .catch(error => {
+
+    //   })
+
+    /* 
+    1. 哪里用await: 一般在结果为promise的表达式左侧
+        如果await 右侧表达式结果不是promise, 直接得到这个结果
+    2. 如果用async: 离await最近的函数定义的左侧
+
+    成功的value: await左侧以级下面的代码都是在成功之后执行(相当于在成功的回调中执行)
+    失败的reason: 使用try...catch中在失败后执行(相当于在失败的回调中执行)
+
+    调用async函数的得到是一个promise对象, promise的结果由aysnc函数体执行的结果决定(与.then类似)
+     */
+    async function getProduct() {
+      try {
+        const response = await ajax('/product.json')
+        console.log(response.data)
+        return response.data
+      } catch (error) { // 相当于失败的回调
+        console.log(error)
+      }
+    }
+
+    function getProduct() {
+      return ajax('/product.json')
+        .then(response => {
+          console.log(response.data)
+        return response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+
+
+
+    async function test() {
+      const promise = getProduct()
+      promise.then(
+        value => {
+          console.log('成功了', value)
+        },
+
+        error => {
+          console.log('失败了', error)
+        }
+      )
+
+      const t = await 3  // 如果await 右侧表达式结果不是promise, 直接得到这个结果
+      console.log(t)
+    }
+
+    test()
+
 
 
   </script>
