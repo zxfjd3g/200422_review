@@ -14,67 +14,62 @@
     // })
 
 
-    function fn() {
-      for (let index = 0; index < 100; index++) {
-        //处理
-      }
-    }
-    fn()
+    // function fn() {
+    //   for (let index = 0; index < 100; index++) {
+    //     //处理
+    //   }
+    // }
+    // fn()
 
-    // 异步回调
-    setTimeout(() => {
-      console.log('执行timout回调')
-    }, 1000)
+    // // 异步回调
+    // setTimeout(() => {
+    //   console.log('执行timout回调')
+    // }, 1000)
 
-    // 需要2S  ===> 定时器回调只能在2S之后才执行
-    for (let index = 0; index < 1000000000; index++) {
-    }
+    // // 需要2S  ===> 定时器回调只能在2S之后才执行
+    // for (let index = 0; index < 1000000000; index++) {
+    // }
+
+    /* 
+    .then()返回的promise的结果状态由什么决定?
+      简单说: 由.then()指定并执行的回调函数的执行结果决定
+      详细说: 
+        什么情况导致promise是失败的?
+          执行出错(抛异常了), 失败的reason就是抛出的错误
+          返回一个失败的promise, 失败的reason就是返回的promise的reason
+        什么情况导致promise是成功的?
+          返回一个成功的promise, 成功的value就是返回promise的value
+          返回一个非promise任务值, 也可以不返回(返回undefined), 成功的value就是返回值
+    */
 
 
-    setTimeout(() => {
-      console.log('执行timout回调')
-    }, 0);
-    Promise.resolve().then(() => {
-      console.log('-----')
+    new Promise((resolve, reject) => {
+      // resolve(1)
+      reject(2)
+    }).then(value => {
+      console.log('onResolved1()', value)
+    }, reason => {
+      console.log('onRejected1()', reason)
+      // 执行出错(抛异常了)
+      // throw 3
+      // 返回一个失败的promise
+      // return Promise.reject(4)
+
+      // 返回一个成功的promise, 成功的value就是返回promise的value
+      // return Promise.resolve(5)
+      // 返回一个非promise任务值, 也可以不返回(返回undefined), 成功的value就是返回值
+      // return 6
+
+      // 注意: 如何创建一个promise但不返回, 本质上是返回undefined ==> value为undefined的成功promise
+      Promise.reject(7)
+
+    }).then(value => {
+      console.log('onResolved2()', value)
+    }, reason => {
+      console.log('onResolved2()', reason)
     })
 
 
-    function ajax(url) {
-      return axios.get(url)
-    }
-
-    function test() {
-      ajax('/xxx').then(response => {
-
-      }).catch(error => {
-
-      })
-    }
-
-    async function test2() {
-      try {
-        const response = await ajax('/xxx')
-        return response.data
-      } catch (error) {
-        // throw error
-        return Promise.reject(error)
-      }
-    }
-
-    function test4() {
-      return ajax('/xxx').then((response) => {
-        return response.data
-      }).catch(error => {
-        // throw error
-        return Promise.reject(error)
-      })
-    }
-
-    function test3() {
-      // async函数返回的promise由什么决定: 由函数体执行的结果
-      const promise = test2()
-    }
-    
   </script>
 </body>
 </html>
