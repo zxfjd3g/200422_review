@@ -13,7 +13,7 @@
     })
     console.log('forEach()之后')
 
-    new Promise((resolve, reject) => { // excutor
+    new Promise((resolve, reject) => { // excutor  执行器函数
       console.log('执行excutor')
       // 执行异步任务
     })
@@ -24,6 +24,11 @@
       console.log('执行timout回调')
     }, 0);
     console.log('setTimeout()之后')
+
+    Promise.resolve().then(() => {
+      console.log('promise成功的回调')
+    })
+    console.log('.then之后')
   </script>
 </body>
 </html>
