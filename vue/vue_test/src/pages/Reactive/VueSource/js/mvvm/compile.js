@@ -155,6 +155,10 @@ var compileUtil = {
     真正用于编译模板语法的方法 
     exp: 表达式   name
     dir: 指令名  text/html/class/model
+
+
+    directive
+    expression
     */
     bind: function(node, vm, exp, dir) { // expression directive
         // 根据指令名得到对应的更新函数

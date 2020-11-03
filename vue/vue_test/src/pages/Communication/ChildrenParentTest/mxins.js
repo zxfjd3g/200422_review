@@ -8,5 +8,5 @@ export const cpMixin = {
       // 给父组件增加count
       this.$parent.money += count
     }
-  }
+  },
 }

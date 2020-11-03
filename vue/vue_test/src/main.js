@@ -8,7 +8,7 @@ import router from './router'
 import store from './store'
 
 Vue.use(ElementUI)
-Vue.use(myPlugin) 
+Vue.use(myPlugin) // 内部会安装此插件  myPlugin(Vue) / myPlugin.install(Vue)
 /* 
 Vue.use()内部做了什么?
 对象插件: 调用插件对象install方法(传入Vue)来安装插件(执行定义新语法的代码)

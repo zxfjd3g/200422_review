@@ -369,10 +369,9 @@ export default {
   - 说vue的数据绑定的原理, 或者数据响应式的原理, 都是在说一个事
   - 当我们修改了data中的数据时, 组件界面是如何自动更新的
   - 这里涉及下面几个重点
-    - 数据代理: Object.defineProperty()
+    - 数据代理: Object.defineProperty()   this.msg = 'abc'   ==> data.msg = 'abc'
     - 数据劫持: Object.defineProperty()
     - 发布-订阅: observer 与 dep 与 watcher
-
 - 数据代理 
   - 通过Object.defineProperty()给vm添加与data对象中对应的属性
   - 在getter中, 读取data中对应的属性值返回  ==> 当我们通过this.xxx读值时, 读取的是data中对应的属性值
@@ -392,11 +391,25 @@ export default {
   - 发布者: observer
   - 订阅者: watcher
   - 订阅器/中间人: dep
+- 初始化
+  - 实现数据代理: 通过defineproperty给vm/组件对象添加与data中对应的属性
+    - 在getter中读取data中对应属性返回
+    - 在setter中将最新的value保存到data对应的属性上
+  - 创建oberver(发布者): 
+    - 使用defineProperty来劫持/监视data中所有层次属性
+    - 为data中每个属性创建对应的dep对象(订阅器) ==> 用于后面界面更新
+  - 创建compile
+    - 编译模板, 实现界面的初始化显示
+    - 为每个包含非事件指令表达式的节点创建对应的watcher
+      - 绑定用于更新界面的回调函数
+      - 将watcher(订阅者)添加到dep中去
 - 更新数据后的基本流程
   - this.xxx = value
   - 由于有数据代理, data中的xxx会更新
   - 由于有数据劫持, xxx对应的setter就会调用
   - 在setter中, 通过dep去通知所有对应的watcher去更新对应的节点
+
+
 
 #### 3) Vue双向数据绑定
 
@@ -405,6 +418,38 @@ export default {
   - 将动态的data数据通过value属性传给input显示  ==> data到view的绑定
   - 给input标签绑定input监听, 一旦输入改变读取最新的值保存到data对应的属性上 ==> view到data的绑定
 - 双向数据绑定是在单向数据绑定(data-->view)的基础, 加入input事件监听(view ==> data)
+
+
+
+### 响应式原理
+
+- 初始化
+  - 实现数据代理
+    - 通过defineproperty给vm定义与data中属性对应的带getter/setter的属性
+    - 在getter中, 读取data中对应的属性值返回      ==> 读取this.msg ==> 读取的是data中msg属性值
+    - 在setter中, 将最新值保存到data对应的属性上   ==> this.msg = 'abc'   ==> 'abc'会保存到data的msg上
+  - 创建observer
+    - 目标: 对data中所有层次的属性进行监视/劫持
+    - 通过defineproperty给data中所有层次属性, 都重新定义, 加上getter与setter
+      - getter: 用来建立dep与watcher的关系
+      - setter: 用来当data数据发生改变去更新界面
+    - 为data中所有层次的属性创建一个对应的dep   ==> 用来将来更新界面的
+  - 创建compile
+    - 目标1: 实现界面的初始化显示
+    - 目标2: 为将更新做准备
+      - 为模板中每个包含表达式(事件表达式除外)的节点创建一个对应的watcher
+      - 给watcher绑定用于更新对应节点的回调函数
+      - 将watcher添加到n个对应的dep中 
+
+- 更新
+  - this.msg = 'abc'
+  - 由于有数据代理 ==> data的msg更新为了'abc'
+  - 由于有数据劫持 ==> data中msg的setter调用了
+  - 在setter中, 通过对应的dep去通知所对应的watcher去更新对应的节点     ==> 使用了订阅发布模式
+
+
+
+
 
 
 
