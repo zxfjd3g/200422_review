@@ -11,7 +11,7 @@
 - Vue.directive(): 
 - Vue.filter(): 
 - Vue.use(): 
-- Vue.nextTick(): 
+- Vue.nextTick(callback): 
 - Vue.set(): 
 - Vue.delete():
 
@@ -64,6 +64,7 @@
 
 - 数据
   - $watch()
+  - $nextTick()
   - $set()
   - $delete()
 - 事件
@@ -167,15 +168,31 @@
 
 (1) beforeCreate(): 在实例初始化之后调用, data和methods都还没有初始化完成, 通过this不能访问
 
+初始化data与methods/computed
+
 (2) created(): 此时data和methods都已初始化完成, 可以通过this去操作, 可以在此发ajax请求
+
+编译模板
 
 (3) beforeMount(): 模板已经在内存中编译, 但还没有挂载到页面上, 不能通过ref找到对应的标签对象
 
+插入到界面上显示
+
 (4) mounted(): 页面已经初始显示, 可以通过ref找到对应的标签, 也可以选择此时发ajax请求
+
+
+
+n次更新数据
 
 (5) beforeUpdate(): 在数据更新之后, 界面更新前调用, 只能访问到原有的界面
 
+更新界面
+
 (6) updated(): 在界面更新之后调用, 此时可以访问最新的界面
+
+
+
+销毁组件/ v-if隐藏/离开不缓存的路由组件
 
 (7) beforeDestroy(): 实例销毁之前调用, 此时实例仍然可以正常工作
 
@@ -278,7 +295,7 @@ export default {
 2) vue自定义事件
 3) 全局事件总线
 4) v-model
-5) .sync
+5) .sync 
 6) $attrs与$listeners
 7) $ref, $children与$parent
 8) provide与inject
