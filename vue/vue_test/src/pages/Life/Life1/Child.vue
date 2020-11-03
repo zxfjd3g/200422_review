@@ -54,13 +54,14 @@
       console.log('--Child destroyed')
     },
 
+    /* 
+    激活与失活
+    */
     activated () {
       console.log('--Child activated')
     },
-
     deactivated () {
       console.log('--Child deactivated')
-      
     },
   }
 </script>

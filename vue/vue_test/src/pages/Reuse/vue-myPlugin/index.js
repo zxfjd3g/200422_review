@@ -9,7 +9,7 @@ import HintButton from './HintButton.vue'
 函数插件
 */
 function myPlugin(Vue) {
-  console.log('myPlugin()', Vue)
+  // console.log('myPlugin()', Vue)
   // 扩展新语法 
 
   // 注册全局组件
@@ -29,7 +29,5 @@ function myPlugin(Vue) {
 
   }
 }
-
-
 
 export default myPlugin

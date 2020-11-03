@@ -1,15 +1,15 @@
 <template>
   <ul>
     <li v-for="item in data" :key="item.text" @click.stop="handleClick(item)">
-      {{ item.text }}
-      <Tree :data="item.children" v-if="item.expanded"/>
+      {{item.text}}
+      <Tree2 :data="item.children" v-if="item.expanded"/>
     </li>
   </ul>
 </template>
 
 <script>
 export default {
-  name: 'Tree',
+  name: 'Tree2',
   props: ['data'],
   methods: {
     handleClick (item) {

@@ -1,17 +1,27 @@
 
 <script>
+/* 
+<template>
+  <div>
+    <h2 v-if="title">{{title}}</h2>
+    <img :src="imgUrl" alt="logo" v-if="imgUrl">
+  </div>
+</template>
+*/
 export default {
   name: 'FC',
-  functional: true, // 当前是函数组件
   props: ['title', 'imgUrl'], // 声明接收属性
   
   /*
-  函数组件:
-    只能针对无状态(data)的组件
-    不用创建实例对象, 支行更快
-    可以没有根标签
+  函数式组件:
+    无状态
+    无法实例化
+    内部没有任何生命周期处理函数
+    轻量,渲染性能高,适合只依赖于外部数据传递而变化的组件(展示组件，无逻辑和状态修改)
   */
+  functional: true, // 当前是函数组件
   render (createElement, context) {
+
     // 不能通过this取props, 当前是函数组件, 没有组件实例
     const {title, imgUrl} = context.props  // 包含组件标签传入的所有标签属性
 

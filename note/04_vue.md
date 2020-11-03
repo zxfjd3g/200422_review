@@ -3,31 +3,30 @@
 #### 1) 全局配置
 
 - Vue.config对象的属性
-- productionTip
+- Vue.config.productionTip = false
 
 #### 2) 全局API
 
-- Vue的一些方法
-- Vue.component(): 注册全局组件
-- Vue.directive()
-- Vue.filter()
-- Vue.use()
-- Vue.nextTick()
-- Vue.set()
-- Vue.delete()
+- Vue.component(): 
+- Vue.directive(): 
+- Vue.filter(): 
+- Vue.use(): 
+- Vue.nextTick(): 
+- Vue.set(): 
+- Vue.delete():
 
 #### 3) 配置选项
 
 - 数据
-  - data
-  - props
-  - computed
-  - methods
-  - watch
+  - data:
+  - props: 
+  - computed: 
+  - methods: 
+  - watch: 
 - DOM
-  - el
-  - template
-  - render
+  - el: 
+  - template: 
+  - render: 
 - 生命周期
   - beforeCreate
   - created
@@ -42,15 +41,15 @@
   - deactivated
   - errorCaptured
 - 资源
-  - directives
-  - filters
-  - components
+  - directives:
+  - filters: 
+  - components: 
 - 杂项
-  - mixins
-  - provider / inject
+  - mixins: 
+  - provide / inject:  
 - 其它
-  - name
-  - functional
+  - name: 
+  - functional:
 
 #### 4) 实例属性
 
@@ -64,9 +63,9 @@
 #### 5) 实例方法
 
 - 数据
-  - vm.$watch()
-  - vm.$set()
-  - vm.$delete()
+  - $watch()
+  - $set()
+  - $delete()
 - 事件
   - $on()
   - $once()
@@ -244,11 +243,13 @@
   - import()返回promise, promise成功的结果就是整体模块对象
   -  本质上: 可以利用import()实现对任意模块的懒加载
 
-#### 4) 函数式组件 + JSX
+#### 4) 函数式组件: functional + render + JSX
 
 - 函数组件的特点
-  - 只能针对无状态(data)的组件
-  - 不用创建实例对象, 运行更快
+  - 无状态
+  - 无法实例化
+  - 内部没有任何生命周期处理函数
+  - 轻量,渲染性能高,适合只依赖于外部数据传递而变化的组件(展示组件，无逻辑和状态修改)
   - 可以没有根标签
 - 编码
 
@@ -540,6 +541,12 @@ cartList: JSON.parse(sessionStorage.getItem('CART_LIST_KEY')) || [],
 
   注意: 一旦声明可以不传, 不能传入一个空串的param参数
 
+- 跳转携带的参数, 刷新就丢失了
+
+  如果注册没有指定/:xxx的点位, 而跳转时通过params配置携带的参数数据, 刷新时就会丢失
+
+  因为url中没有携带的参数数据路径
+
 - 路由组件能不能传递props参数?
 
   可以, 但只是将params/query映射成props传入路由组件的
@@ -580,13 +587,12 @@ cartList: JSON.parse(sessionStorage.getItem('CART_LIST_KEY')) || [],
       }
     }
     ```
-  ```
-  
-  ```
-  
-- 说明:
-  
-      声明式路由跳转之所有没有问题, 是因为默认传入了成功的空回调函数
+    
+  - 说明:
+    
+    声明式路由跳转之所有没有问题, 是因为默认传入了成功的空回调函数
+    
+    
 
 #### 3) 有点难度, 但很重要的
 
