@@ -2,8 +2,8 @@
   <div>
     <p>msg3: {{msg3}}</p>
     <hr>
-    <data-test :msg3="msg3" @update:msg3="msg3=$event"></data-test>
-    <!-- <data-test :msg3.sync="msg3"></data-test> -->
+    <!-- <data-test :msg3="msg3" @update:msg3="msg3=$event"></data-test> -->
+    <data-test :msg3.sync="msg3"></data-test>
   </div>
 </template>
 
