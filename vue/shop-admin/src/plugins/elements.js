@@ -100,6 +100,7 @@ const { alert, confirm, prompt } = msgbox
 Vue.use(Scrollbar);  // 注册单独引入的隐藏组件
 Vue.use(Drawer); 
 Vue.use(Popconfirm); 
+Vue.use(Popover);  // 如果不声明使用Popover, PopConfirm的背景是透明的
 Vue.use(Pagination);
 Vue.use(Dialog);
 Vue.use(Dropdown);
@@ -144,7 +145,7 @@ Vue.use(CheckboxGroup);
 // Vue.use(ButtonGroup);
 // Vue.use(TimeSelect);
 // Vue.use(TimePicker);
-Vue.use(Popover);
+
 // Vue.use(Tooltip);
 // Vue.use(Tabs);
 // Vue.use(TabPane);
@@ -184,6 +185,3 @@ Vue.prototype.$confirm = confirm;
 Vue.prototype.$prompt = prompt;
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
-
-
-// this.$message('ttt')
