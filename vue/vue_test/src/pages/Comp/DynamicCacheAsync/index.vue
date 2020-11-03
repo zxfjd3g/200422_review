@@ -4,13 +4,13 @@
     <button @click="currentComp = 'Home'">Home</button>
     <button @click="currentComp = 'Posts'">Posts</button>
     <!-- 没有缓存 -->
-    <component :is="currentComp" />
+    <!-- <component :is="currentComp" /> -->
 
     <!-- 有缓存 -->
-    <keep-alive :exclude="['Home']">
-      <component :is="currentComp"/>
-    </keep-alive>
-
+   <keep-alive>
+    <component :is="currentComp"/>
+  </keep-alive>
+ 
     <button @click="loadModule">动态/异步加载模块</button>
    
   </div>
@@ -36,7 +36,7 @@
   const Posts = () => import('./components/Posts')
 
   setTimeout(() => {
-    import('./components/Posts').then(module => {
+    import('./components/AsyncComp').then(module => {
       console.log(module)
     })
   }, 2000);
@@ -47,7 +47,7 @@
 
     data () {
       return {
-        currentComp: 'Home' // 初始要显示的动态组件的名称
+        currentComp: 'Home' // 初始要显示的动态组件的名称(组件标签名)
       }
     },
 

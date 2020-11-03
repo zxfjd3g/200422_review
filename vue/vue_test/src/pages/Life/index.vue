@@ -13,9 +13,9 @@
         <router-view></router-view>
       </keep-alive>
      -->
-     <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+    <keep-alive :exclude="['Life1', 'Life2']">
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
