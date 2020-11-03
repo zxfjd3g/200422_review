@@ -30,7 +30,7 @@ new Vue({
     Vue.prototype.$bus = this
   },
   
-  render: h => h(App),
+  render: createElement => createElement(App),  // <App/>
   router, // 路由器
   store, // vuex的store
 }).$mount('#app')
