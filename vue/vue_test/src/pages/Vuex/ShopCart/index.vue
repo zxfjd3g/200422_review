@@ -11,7 +11,7 @@
 
     <hr>
     <button @click="$store.commit('asyncUpdate')">更新</button>
-    <button @click="$store.commit('getCartList', true)">更新获取</button>
+    <button @click="$store.dispatch('getCartList', true)">更新获取</button>
   </div>
 </template>
 
