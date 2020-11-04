@@ -1,53 +1,57 @@
 const state = {
+  // 页面加载初始化时执行
   cartList: JSON.parse(sessionStorage.getItem('CART_LIST_KEY')) || [],
   xxx: {}
 }
 const mutations = {
-  
   RECEIVE_CART_LIST (state, cartList) {
     state.cartList = cartList
   },
 
-  // 异步mutation更新状态数据
+  // 当前mutation函数执行完后, vuex调试工具立即记录当前state数据==> 不正确
   asyncUpdate (state) {
+    // 异步更新数据
     setTimeout(() => {
       state.cartList.push({
         id: Date.now(),
-        name: '商品3',
-        price: 1212,
-        count: 3
+        name: 'CC',
+        price: 1000,
+        count: 2
       })
     }, 1000)
-  },
+  }
 }
 const actions = {
 
   getCartList ({commit, state}, isReload) {
+
+    // 如果当前cartList已经有了, 直接结束
     if (!isReload && state.cartList.length>0) return
+
+    console.log('异步请求获取列表数据')
     setTimeout(() => {
-      console.log('请求得到数据')
       const cartList = [
         {
           id: 1,
-          name: '商品1',
-          price: 1212,
+          name: 'AA',
+          price: 1000,
           count: 2
         },
         {
           id: 2,
-          name: '商品2',
-          price: 2323,
+          name: 'BB',
+          price: 2000,
           count: 3
         }
       ]
-      commit('RECEIVE_CART_LIST', cartList)
 
-    }, 2000);
+      commit('RECEIVE_CART_LIST', cartList)
+    }, 1000);
   }
 }
 const getters = {
   totalPrice (state) {
-    return state.cartList.reduce((pre, item) => pre + item.price * item.count, 0)
+    return state.cartList.reduce((pre, item) => pre + item.count*item.price, 0)
   }
 }
 

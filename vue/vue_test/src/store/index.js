@@ -1,6 +1,7 @@
 /* 
-vuex最核心管理对象(仓库)
+vuex最核心管理对象(仓库)  store对象
 */
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -9,9 +10,36 @@ import other from './modules/other'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  modules: {
-    shopCart,
-    other
+const mutations = {
+  xxx (state) { // 总state
+
   }
-}) 
+}
+
+const actions = {
+  
+}
+
+const getters = {
+  
+}
+
+const modules = {
+  shopCart,
+  other
+}
+
+export default new Vuex.Store({
+  mutations,
+  actions,
+  getters,
+  modules
+})
+
+/* 
+总结的state:
+{
+  shopCart: {cartList: [], xxx: {}},
+  other: {yyy: '', zzz: {}}
+}
+*/

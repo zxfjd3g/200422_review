@@ -19,23 +19,12 @@
   import {mapState, mapGetters} from 'vuex'
   export default {
     name: 'ShopCart',
-   
     computed: {
       ...mapState({
         cartList: state => state.shopCart.cartList
       }),
       ...mapGetters(['totalPrice'])
-    },
 
-    // watch: {
-
-    //   cartList: {
-    //     deep: true, // 深度监视
-    //     immediate: true, // 是否初始化立即执行一次
-    //     handler (value) {
-    //       console.log('state数据cartList发生了改变')
-    //     }
-    //   }
-    // },
+    }
   }
 </script>
