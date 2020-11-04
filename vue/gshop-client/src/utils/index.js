@@ -24,16 +24,16 @@ export function getUserTempId() {
 /* 
 保存用户信息
 */
-export function saveUserInfo(userInfo) {
-  window.localStorage.setItem('USER_INFO_KEY', JSON.stringify(userInfo))
+export function saveToken(token) {
+  window.localStorage.setItem('TOKEN_KEY', token)
 }
 
 /* 
 读取用户信息
 */
-export const getUserInfo = () => JSON.parse(localStorage.getItem('USER_INFO_KEY')) || {}
+export const getToken = () => localStorage.getItem('TOKEN_KEY')
 
 /* 
 删除用户信息
 */
-export const removeUserInfo = () => localStorage.removeItem('USER_INFO_KEY')
+export const removeToken = () => localStorage.removeItem('TOKEN_KEY')

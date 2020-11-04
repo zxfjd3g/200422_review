@@ -34,7 +34,7 @@ instance.interceptors.request.use(config => {
   config.headers.userTempId = userTempId
   
   /* 6. 如果当前有token, 自动携带token的请求头 */
-  const token = store.state.user.userInfo.token
+  const token = store.state.user.token
   if (token) {
     config.headers.token = token
   }

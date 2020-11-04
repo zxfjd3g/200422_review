@@ -5,6 +5,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import store from '@/store'
+import {Message} from 'element-ui'
 
 // 声明使用
 Vue.use(VueRouter)
@@ -49,7 +50,7 @@ const router = new VueRouter({ // 配置对象
 const checkPaths = ['/trade', '/pay', '/center'] 
 
 // 注册全局前置守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   console.log('全局 前置守卫')
 
   // 得到目标路由路径
@@ -57,18 +58,34 @@ router.beforeEach((to, from, next) => {
   // checkPaths.includes(targetPath)
     // 字符串的方法startsWith() / indexOf()
   const needCheck = checkPaths.some(path => targetPath.startsWith(path))   // /paysuccess /center/myorder
-  // 如果目标路径是需要检查路径
-  if (needCheck) {
-    const token = store.state.user.userInfo.token
-    // 如果已经登陆, 放行
-    if (token) {
-      next()
-    } else {
-      // 如果还没有登陆, 强制跳转到login
-      next('/login?redirect='+to.path)  // 携带目标路径的参数数据
-    }
-  } else { // 如果目标路径是不需要检查路径, 直接放行
+  const {token, userInfo} = store.state.user
+  if (userInfo.name) {
     next()
+    return
+  }
+  // 如果目标路径是需要检查路径
+  try {
+    if (needCheck) {
+      if (token){
+        await store.dispatch('getUserInfo')
+        next()
+      } else {
+        // 当前没登陆且前面也没有登陆过, 强制跳转到login
+        next('/login?redirect='+to.path)  // 携带目标路径的参数数据
+      }
+    } else { // 如果目标路径是不需要检查路径, 直接放行
+      if (token) {
+        store.dispatch('getUserInfo')
+      }
+      next()
+    }
+  } catch (error) {
+    // 重置token
+    await store.dispatch('user/logout')
+    // 提示错误信息
+    Message.error(error.message || 'Has Error')
+    // 跳转到登陆页面, 并携带原本要跳转的路由路径, 用于登陆成功后跳转
+    next(`/login?redirect=${to.path}`)
   }
 })
 

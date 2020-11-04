@@ -9,34 +9,33 @@
     </ul>
     <p>总价格: {{totalPrice}}</p>
 
-    <br>
-    <br>
-    <button @click="$store.commit('asyncUpdate')">添加购物项</button>
-    <button @click="$store.dispatch('getCartList', true)">重新获取</button>
+    <hr>
+    <button @click="$store.commit('asyncUpdate')">更新</button>
+    <button @click="$store.commit('getCartList', true)">更新获取</button>
   </div>
 </template>
 
 <script>
   import {mapState, mapGetters} from 'vuex'
   export default {
-   name: 'ShopCart',
-
-   computed: {
-     ...mapState({
-       cartList: state => state.shopCart.cartList
-     }),
-     ...mapGetters(['totalPrice'])
-   },
-
-    watch: {
-
-      cartList: {
-        deep: true, // 尝试监视
-        immediate: true, // 是否初始化立即执行一次
-        handler (value) {
-          console.log('state数据cartList发生了改变')
-        }
-      }
+    name: 'ShopCart',
+   
+    computed: {
+      ...mapState({
+        cartList: state => state.shopCart.cartList
+      }),
+      ...mapGetters(['totalPrice'])
     },
+
+    // watch: {
+
+    //   cartList: {
+    //     deep: true, // 深度监视
+    //     immediate: true, // 是否初始化立即执行一次
+    //     handler (value) {
+    //       console.log('state数据cartList发生了改变')
+    //     }
+    //   }
+    // },
   }
 </script>

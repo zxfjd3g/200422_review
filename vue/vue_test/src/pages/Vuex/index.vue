@@ -17,10 +17,16 @@
     mounted () {
       this.$store.dispatch('getCartList')
 
-      // 给窗口绑定卸载前的事件监听 ===> 将当前的cartList保存到sessionStorage
-      window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem('CART_LIST_KEY', JSON.stringify(this.$store.state.shopCart.cartList))
-      })
+      this.onBeforeUnload = () => {
+        sessionStorage.setItem('CART_LIST_KEY', 
+          JSON.stringify(this.$store.state.shopCart.cartList))
+      }
+
+      window.addEventListener('beforeunload', this.onBeforeUnload)
+    },
+
+    beforeDestroy () {
+      window.removeEventListener('beforeunload', this.onBeforeUnload)
     }
 	}
 </script>

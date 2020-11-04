@@ -5,7 +5,7 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p v-if="userInfo.token">
+          <p v-if="userInfo.nickName">
             <span>{{userInfo.nickName}}</span>
             <a href="javascript:" style="margin-left: 15px" @click="logout">退出</a>
           </p>

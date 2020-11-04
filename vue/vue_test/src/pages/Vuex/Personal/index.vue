@@ -14,10 +14,11 @@
 </template>
 
 <script>
-
+  import { mapState, mapGetters } from 'vuex'
   export default {
     name: 'Personal',
     computed: {
+
       cartList () {
         return this.$store.state.shopCart.cartList
       },
