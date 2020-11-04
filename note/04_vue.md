@@ -573,11 +573,15 @@ cartList: JSON.parse(sessionStorage.getItem('CART_LIST_KEY')) || [],
 #### 1) 一些基本知识
 
 - 跳转/导航路由的2种基本方式
-	- 声明式路由:  <router-link to="/xxx">xxx</router-link/>
+	- 声明式路由:  <router-link to="/xxx" replace>xxx</router-link/>
 	- 编程式路由: this.$router.push(location)
 
 - 跳转路由携带参数(数据)的方式
 	- params
+	  - 注册的路由路径得有点位: /xxx/:name/:age
+	  - 跳转时指定参数值:
+	    - /xxx/abc/12
+	    - {name: 'xxx', params: {name: 'abc', age: 12}}
 	- query参数
 	- props
 	  -  props: true, // 只能同名映射params参数
@@ -630,13 +634,17 @@ cartList: JSON.parse(sessionStorage.getItem('CART_LIST_KEY')) || [],
 
     说明文档: https://github.com/vuejs/vue-router/releases?after=v3.3.1
 
-  - 解决:
+  - push('/xxx', () => {})
 
-    - 办法1: 在每次push时指定回调函数或catch错误
+  - push('/xxx').catch()
+  
+  - 解决:
+  
+  - 办法1: 在每次push时指定回调函数或catch错误
     - 办法2: 重写VueRouter原型上的push方法 (比较好)
       - 1). 如果没有指定回调函数, 需要调用原本的push()后catch()来处理错误的promise
       - 2). 如果传入了回调函数, 本身就没问题, 直接调用原本的push()就可以
-
+  
     ```js
     const originPush = VueRouter.prototype.push
     VueRouter.prototype.push = function (location, onComplete, onAbort) {
@@ -713,7 +721,10 @@ cartList: JSON.parse(sessionStorage.getItem('CART_LIST_KEY')) || [],
   - 原理:
     - history: 内部利用的是history对象的pushState()和replaceState() (H5新语法)
     - hash: 内部利用的是location对象的hash语法
-
+    - 写hash路径
+      - 读hash路径
+      - 监视hash路径的变化
+  
 - 如何让路由跳转后, 滚动条自动停留到起始位置?
 
   ```js
