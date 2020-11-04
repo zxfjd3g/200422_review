@@ -731,7 +731,7 @@ cartList: JSON.parse(sessionStorage.getItem('CART_LIST_KEY')) || [],
   - 在全局前置守卫中, 强制跳转到登陆页面时携带目标路径的redirect参数
 
     ```js
-    if (token) {
+    if (userInfo.name) {
       next()
     } else {
       // 如果还没有登陆, 强制跳转到login
