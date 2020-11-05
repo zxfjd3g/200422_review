@@ -59,7 +59,7 @@ router.beforeEach(async (to, from, next) => {
     // 字符串的方法startsWith() / indexOf()
   const needCheck = checkPaths.some(path => targetPath.startsWith(path))   // /paysuccess /center/myorder
   const {token, userInfo} = store.state.user
-  if (userInfo.name) {
+  if (userInfo.name) {// 如果已经登陆了, 直接放行
     next()
     return
   }
