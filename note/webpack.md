@@ -173,7 +173,7 @@
   -  对异步模块包使用: prefetch
   - 对同步模块包使用: preload
 
-##### cache 缓存
+##### 浏览器cache/缓存
 
 - hash 
   - webpack每次构建都会生成一个新的且唯一的hash
